@@ -18,7 +18,6 @@ This layer depends on the domain layer (domain services). Here, we define the fu
 # A domain driven design
 
 To define domain-driven design we should first establish what we mean by domain in this context (and in development in general). The common dictionary definition of domain is: “A sphere of knowledge or activity.” Drilling down a bit from that, domain in the realm of software engineering commonly refers to the subject area on which the application is intended to apply. In other words, during application development, the domain is the “sphere of knowledge and activity around which the application logic revolves.”
-Another common term used during software development is the domain layer or domain logic which may be better known to many developers as the business logic. The business logic of an application refers to the higher-level rules for how business logic interact with one another to create and modify modelled data.
 
 
 
@@ -30,7 +29,7 @@ Another common term used during software development is the domain layer or doma
 ## Dependencies
 
 You need install Mysql in your localhost.
-after that you on clone the project, downoland the packages and run it.
+After that you on clone the project, downoland the packages and run it.
 
 ### Node version
 
@@ -51,6 +50,7 @@ after that you on clone the project, downoland the packages and run it.
 ```sh
 $ git clone https://github.com/RM02/hexagonal-architecture-node.git
 $ npm i
+$ add DB_URL to .env file 
 $ npx prisma db push
 $ npm start
 

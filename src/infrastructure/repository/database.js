@@ -11,6 +11,14 @@ const saveOrder = async (data) => {
             subject: data.subject,
             status: data.status,
             remark: data.remark,
+            user: {
+                connect: {
+                    id: data.user.userId
+                }
+            },
+            items: {
+                create: data.items
+            },
             editedDate: data.editedDate,
             effectiveDate: data.effectiveDate
         }
@@ -18,7 +26,20 @@ const saveOrder = async (data) => {
     return order
 }
 const getOrders = async () => {
-    const orders = await prisma.order.findMany()
+    const orders = await prisma.order.findMany({
+        select:{
+            id: true,
+            userId: true,
+            subject: true,
+            items: {
+                select: {
+                    id: true,
+                    name: true,
+                    serie: true
+                }
+            }
+        }
+    })
     return orders
 }
 const remove = async (id) => {

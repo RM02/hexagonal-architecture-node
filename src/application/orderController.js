@@ -10,9 +10,8 @@ export class OrderController {
 
     constructor () {}
     /**
-     * createOrder
-     * @param { data } data
-     * @return { order } object
+     * @param { data } data object
+     * @return { order } new order
      */
     
     createOrder = async (data) => {
@@ -27,14 +26,17 @@ export class OrderController {
         let policy = await OrderCreationManager.validateOrder(data)
         let order = await OrderCreationManager.createOrder(data)
         
-        if (!policy.isRoleManager && policy.isRequired) {
-            // include policy
+        if (policy.isRequired) {
             return
         }
         const orderCreated = await databaseManager.saveOrder(order)
         return orderCreated
         
     }
+    /**
+     * @param {data} data object
+     * @return data
+     */
     editOrder = async (data) => {
 
         if (!data) {
@@ -49,6 +51,10 @@ export class OrderController {
         return data
         
     }
+    /**
+     * @param {id} order identificator
+     * @return
+     */
     removeOrder = async (id) => {
         if (!id) {
             return
@@ -57,6 +63,10 @@ export class OrderController {
         const deletedOrder = await databaseManager.removeOrder(id)
         return deletedOrder
     }
+    /**
+     * 
+     * @return order list
+     */
     getOrders = async () => {
         const orders = await databaseManager.getOrders()
         return orders

@@ -9,22 +9,32 @@ datasource db {
   url      = env("DB_URL")
 }
 
-model Product {
-  id      String  @id
+model Item {
+  id      String  @id @unique
   name    String
+  brand   String
+  serie   String
+  price   String
+  orders  Order[]
 }
 
 model Order {
   id            String    @id
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
   subject       String
   status        String
-  remark        String
+  remark        String?
   editedDate    String?
   effectiveDate String
+  items Item[]
 }
 
 model User {
   id       String  @id
   name     String
   lastName String
+  email String @unique
+  password String
+  orders Order[]
 }
